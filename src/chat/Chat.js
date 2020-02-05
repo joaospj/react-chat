@@ -9,11 +9,11 @@ function Chat() {
     { msg: "Hi there!", sender: true }
   ]);
 
-  const { value, setValue, reset } = useInput("oii");
+  const { value, setValue, reset } = useInput("");
 
   function handleSubmit(e) {
     e.preventDefault();
-    alert(value);
+    setMessages([...messages, { msg: value, sender: true }]);
     reset();
   }
 
