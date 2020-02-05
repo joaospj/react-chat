@@ -1,12 +1,21 @@
 import React, { useState } from "react";
 import "./Chat.css";
 import Message from "./Message";
+import { useInput } from "../hooks/useInput";
 
 function Chat() {
   const [messages, setMessages] = useState([
     { msg: "Hi there!", sender: false },
     { msg: "Hi there!", sender: true }
   ]);
+
+  const { value, setValue, reset } = useInput("oii");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert(value);
+    reset();
+  }
 
   return (
     <div>
@@ -18,12 +27,12 @@ function Chat() {
           })}
         </div>
         <div className="footer">
-          <div className="form">
-            <input type="text" />
+          <form onSubmit={handleSubmit} className="form">
+            <input name="msg" type="text" onChange={setValue} value={value} />
             <div>
               <i className="material-icons">send</i>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </div>
