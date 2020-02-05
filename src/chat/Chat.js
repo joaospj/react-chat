@@ -1,18 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Chat.css";
+import Message from "./Message";
 
 function Chat() {
+  const [messages, setMessages] = useState([
+    { msg: "Hi there!", sender: false },
+    { msg: "Hi there!", sender: true }
+  ]);
+
   return (
     <div>
       <h1>Chat</h1>
       <div className="container">
         <div className="chat">
-          <div className="msg-wrap">
-            <span className="msg">Hi there!</span>
-          </div>
-          <div className="msg-wrap">
-            <span className="msg-sender">Hi there!</span>
-          </div>
+          {messages.map((m, i) => {
+            return <Message key={i} {...m} />;
+          })}
         </div>
         <div className="footer">
           <div className="form">
