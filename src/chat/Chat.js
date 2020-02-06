@@ -32,7 +32,7 @@ function Chat() {
     e.preventDefault();
     if (value.trim() !== "") {
       setMessages([...messages, { msg: value, sender: true }]);
-      socket.emit("chat message", { msg: value, author: "John" });
+      socket.emit("chat message", value); //{ msg: value, author: "John" }
     }
     reset();
   }
