@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Chat.css";
 import Message from "./Message";
 import { useInput } from "../hooks/useInput";
+import socketIOClient from "socket.io-client";
 
 function Chat() {
   const [messages, setMessages] = useState([
@@ -10,6 +11,16 @@ function Chat() {
   ]);
 
   const { value, setValue, reset } = useInput("");
+
+  useEffect(() => {
+    const socket = socketIOClient("http://localhost:5000");
+    socket.on("chat message", data =>
+      setMessages(messages => {
+        const oldMessages = [...messages, { msg: data, sender: false }];
+        return oldMessages;
+      })
+    );
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
