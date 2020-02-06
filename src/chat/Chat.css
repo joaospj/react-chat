@@ -1,6 +1,6 @@
 .container {
   width: 60%;
-  height: 500px;
+  height: 100vh;
   margin: auto;
 }
 
@@ -45,6 +45,7 @@ input {
   border-radius: 4px;
   box-sizing: border-box;
   outline: none;
+  margin-left: -5%;
 }
 .form div {
   display: inline-block;
@@ -53,7 +54,7 @@ input {
   height: 100%;
   border-radius: 0.5em;
   cursor: pointer;
-  position: relative;
+  position: absolute;
   margin-left: 0.5em;
 }
 
@@ -66,6 +67,7 @@ span {
   border-radius: 0.5em;
   text-align: left;
   font-weight: bold;
+  word-wrap: break-word;
 }
 
 .msg {
@@ -98,7 +100,20 @@ span {
 
 i {
   position: relative;
-  top: 17%;
+  top: 25%;
   color: #444;
-  width: 50%;
+  width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+  .form div {
+    width: 10%;
+  }
+
+  .form input {
+    margin-left: -10%;
+  }
 }

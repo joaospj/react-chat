@@ -6,10 +6,7 @@ import socketIOClient from "socket.io-client";
 
 let socket;
 function Chat({ nickname }) {
-  const [messages, setMessages] = useState([
-    { msg: "Hi there!", sender: false },
-    { msg: "Hi there!", sender: true }
-  ]);
+  const [messages, setMessages] = useState([]);
   const [endpoint] = useState("http://localhost:5000");
 
   const { value, setValue, reset } = useInput("");
@@ -41,29 +38,26 @@ function Chat({ nickname }) {
   }
 
   return (
-    <div>
-      <h1>Chat</h1>
-      <div className="container">
-        <div className="chat">
-          {messages.map((m, i) => {
-            return <Message key={i} {...m} />;
-          })}
-        </div>
-        <div className="footer">
-          <form onSubmit={handleSubmit} className="form">
-            <input
-              name="msg"
-              type="text"
-              onChange={setValue}
-              value={value}
-              autoComplete="off"
-              autofocus="true"
-            />
-            <div onClick={handleSubmit}>
-              <i className="material-icons">send</i>
-            </div>
-          </form>
-        </div>
+    <div className="container">
+      <div className="chat">
+        {messages.map((m, i) => {
+          return <Message key={i} {...m} />;
+        })}
+      </div>
+      <div className="footer">
+        <form onSubmit={handleSubmit} className="form">
+          <input
+            name="msg"
+            type="text"
+            onChange={setValue}
+            value={value}
+            autoComplete="off"
+            autoFocus
+          />
+          <div onClick={handleSubmit}>
+            <i className="material-icons">send</i>
+          </div>
+        </form>
       </div>
     </div>
   );

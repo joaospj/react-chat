@@ -1,11 +1,12 @@
 .login-container {
   width: 60%;
-  height: 500px;
+  height: 100vh;
   margin: auto;
   background-color: lightsteelblue;
   text-align: center;
 }
 
+h1,
 h2 {
   text-align: center;
   padding: 2em;
@@ -13,11 +14,21 @@ h2 {
 
 .form-login input,
 .form-login input:focus {
-  width: 20%;
+  width: 30%;
   height: 2em;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
   outline: none;
   font-size: 2em;
+}
+
+@media only screen and (max-width: 768px) {
+  .login-container {
+    width: 100%;
+  }
+  .form-login input,
+  .form-login input:focus {
+    width: 60%;
+  }
 }
