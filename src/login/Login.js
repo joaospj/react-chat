@@ -22,6 +22,7 @@ function Login({ saveNickname, nickname }) {
           autoComplete="off"
           value={value}
           onChange={setValue}
+          autofocus="true"
         />
       </form>
       <span>{nickname}</span>

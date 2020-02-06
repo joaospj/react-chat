@@ -16,12 +16,9 @@ app.get("/", function(req, res) {
 
 io.on("connection", function(socket) {
   console.log("a user connected");
-  socket.broadcast.emit("chat message", {
-    msg: `${socket.id} entrou na sala`,
-    author: "Servidor"
-  });
-  socket.emit("chat message", {
-    msg: "Você entrou na sala",
+  let nickname = socket.handshake.query.nickname;
+  io.emit("chat message", {
+    msg: `${nickname} entrou na sala`,
     author: "Servidor"
   });
 
@@ -29,6 +26,13 @@ io.on("connection", function(socket) {
     socket.broadcast.emit("chat message", {
       msg: data.msg,
       author: data.author || socket.id
+    });
+  });
+
+  socket.on("disconnect", function() {
+    io.emit("chat message", {
+      msg: `${nickname} saiu da sala`,
+      author: "Servidor"
     });
   });
 });

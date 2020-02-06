@@ -15,7 +15,11 @@ function Chat({ nickname }) {
   const { value, setValue, reset } = useInput("");
 
   useEffect(() => {
-    socket = socketIOClient(endpoint);
+    socket = socketIOClient(endpoint, {
+      query: {
+        nickname: nickname
+      }
+    });
     socket.on("chat message", data => {
       setMessages(messages => {
         const oldMessages = [
@@ -24,9 +28,8 @@ function Chat({ nickname }) {
         ];
         return oldMessages;
       });
-      console.log(data);
     });
-  }, [endpoint]);
+  }, [nickname, endpoint]);
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -54,6 +57,7 @@ function Chat({ nickname }) {
               onChange={setValue}
               value={value}
               autoComplete="off"
+              autofocus="true"
             />
             <div onClick={handleSubmit}>
               <i className="material-icons">send</i>
