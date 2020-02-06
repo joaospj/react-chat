@@ -23,4 +23,8 @@ io.on("connection", function(socket) {
   console.log("a user connected");
   socket.broadcast.emit("chat message", `${socket.id} entrou na sala`);
   socket.emit("chat message", "Você entrou na sala");
+
+  socket.on("chat message", function(msg) {
+    socket.broadcast.emit("chat message", `${socket.id} : ${msg}`);
+  });
 });

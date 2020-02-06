@@ -4,28 +4,31 @@ import Message from "./Message";
 import { useInput } from "../hooks/useInput";
 import socketIOClient from "socket.io-client";
 
+let socket;
 function Chat() {
   const [messages, setMessages] = useState([
     { msg: "Hi there!", sender: false },
     { msg: "Hi there!", sender: true }
   ]);
+  const [endpoint] = useState("http://localhost:5000");
 
   const { value, setValue, reset } = useInput("");
 
   useEffect(() => {
-    const socket = socketIOClient("http://localhost:5000");
+    socket = socketIOClient(endpoint);
     socket.on("chat message", data =>
       setMessages(messages => {
         const oldMessages = [...messages, { msg: data, sender: false }];
         return oldMessages;
       })
     );
-  }, []);
+  }, [endpoint]);
 
   function handleSubmit(e) {
     e.preventDefault();
     if (value.trim() !== "") {
       setMessages([...messages, { msg: value, sender: true }]);
+      socket.emit("chat message", value);
     }
     reset();
   }
