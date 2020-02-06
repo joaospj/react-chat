@@ -13,7 +13,9 @@ function Chat() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setMessages([...messages, { msg: value, sender: true }]);
+    if (value.trim() !== "") {
+      setMessages([...messages, { msg: value, sender: true }]);
+    }
     reset();
   }
 
@@ -29,7 +31,7 @@ function Chat() {
         <div className="footer">
           <form onSubmit={handleSubmit} className="form">
             <input name="msg" type="text" onChange={setValue} value={value} />
-            <div>
+            <div onClick={handleSubmit}>
               <i className="material-icons">send</i>
             </div>
           </form>
