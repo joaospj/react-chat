@@ -20,6 +20,7 @@ input {
   height: 85%;
   background-color: #ccc;
   overflow: auto;
+  overflow-x: hidden;
 }
 
 .footer {
@@ -74,6 +75,19 @@ span {
 .msg-wrap {
   width: 100%;
   display: inline-block;
+}
+
+.msg-wrap > div {
+  width: 100%;
+}
+
+.msg-author {
+  display: block;
+  float: left;
+  font-size: 0.7em;
+  color: #444;
+  padding: 0.5em 0.75em 0 0.75em;
+  font-weight: bold;
 }
 
 .msg-sender {

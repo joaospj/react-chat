@@ -21,10 +21,19 @@ app.get("/", function(req, res) {
 
 io.on("connection", function(socket) {
   console.log("a user connected");
-  socket.broadcast.emit("chat message", `${socket.id} entrou na sala`);
-  socket.emit("chat message", "Você entrou na sala");
+  socket.broadcast.emit("chat message", {
+    msg: `${socket.id} entrou na sala`,
+    author: "Servidor"
+  });
+  socket.emit("chat message", {
+    msg: "Você entrou na sala",
+    author: "Servidor"
+  });
 
-  socket.on("chat message", function(msg) {
-    socket.broadcast.emit("chat message", `${socket.id} : ${msg}`);
+  socket.on("chat message", function(data) {
+    socket.broadcast.emit("chat message", {
+      msg: data.msg,
+      author: data.author
+    });
   });
 });

@@ -16,19 +16,23 @@ function Chat() {
 
   useEffect(() => {
     socket = socketIOClient(endpoint);
-    socket.on("chat message", data =>
+    socket.on("chat message", data => {
       setMessages(messages => {
-        const oldMessages = [...messages, { msg: data, sender: false }];
+        const oldMessages = [
+          ...messages,
+          { msg: data.msg, sender: false, author: data.author }
+        ];
         return oldMessages;
-      })
-    );
+      });
+      console.log(data);
+    });
   }, [endpoint]);
 
   function handleSubmit(e) {
     e.preventDefault();
     if (value.trim() !== "") {
       setMessages([...messages, { msg: value, sender: true }]);
-      socket.emit("chat message", value);
+      socket.emit("chat message", { msg: value, author: "John" });
     }
     reset();
   }
