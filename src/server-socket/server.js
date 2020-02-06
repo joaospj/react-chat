@@ -10,11 +10,6 @@ const server = app.listen(5000, function() {
 
 const io = require("socket.io")(server);
 
-// io.on("connection", function(socket) {
-//   socket.on("chat message", function(msg) {
-//     io.emit("chat message", `${msg}`);
-//   });
-// });
 app.get("/", function(req, res) {
   res.send("Ok");
 });
@@ -33,7 +28,7 @@ io.on("connection", function(socket) {
   socket.on("chat message", function(data) {
     socket.broadcast.emit("chat message", {
       msg: data.msg,
-      author: data.author
+      author: data.author || socket.id
     });
   });
 });

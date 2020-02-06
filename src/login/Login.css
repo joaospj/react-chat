@@ -1,0 +1,23 @@
+.login-container {
+  width: 60%;
+  height: 500px;
+  margin: auto;
+  background-color: lightsteelblue;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+  padding: 2em;
+}
+
+.form-login input,
+.form-login input:focus {
+  width: 20%;
+  height: 2em;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  outline: none;
+  font-size: 2em;
+}

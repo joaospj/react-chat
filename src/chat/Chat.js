@@ -5,7 +5,7 @@ import { useInput } from "../hooks/useInput";
 import socketIOClient from "socket.io-client";
 
 let socket;
-function Chat() {
+function Chat({ nickname }) {
   const [messages, setMessages] = useState([
     { msg: "Hi there!", sender: false },
     { msg: "Hi there!", sender: true }
@@ -32,7 +32,7 @@ function Chat() {
     e.preventDefault();
     if (value.trim() !== "") {
       setMessages([...messages, { msg: value, sender: true }]);
-      socket.emit("chat message", value); //{ msg: value, author: "John" }
+      socket.emit("chat message", { msg: value, author: nickname }); //
     }
     reset();
   }
@@ -48,7 +48,13 @@ function Chat() {
         </div>
         <div className="footer">
           <form onSubmit={handleSubmit} className="form">
-            <input name="msg" type="text" onChange={setValue} value={value} />
+            <input
+              name="msg"
+              type="text"
+              onChange={setValue}
+              value={value}
+              autoComplete="off"
+            />
             <div onClick={handleSubmit}>
               <i className="material-icons">send</i>
             </div>
